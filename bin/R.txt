@@ -241,7 +241,13 @@ int drawable abs__textfield_searchview_holo_light 0x7f02006c
 int drawable abs__textfield_searchview_right_holo_dark 0x7f02006d
 int drawable abs__textfield_searchview_right_holo_light 0x7f02006e
 int drawable abs__toast_frame 0x7f02006f
-int drawable ic_launcher 0x7f020070
+int drawable action_refresh 0x7f020070
+int drawable button_design 0x7f020071
+int drawable button_design2 0x7f020072
+int drawable edit_text_design2 0x7f020073
+int drawable edit_text_file 0x7f020074
+int drawable ic_launcher 0x7f020075
+int drawable yp 0x7f020076
 int id AttendanceEntry 0x7f04003a
 int id AttendanceString 0x7f040039
 int id CampCodeEntry 0x7f04003d
@@ -249,6 +255,7 @@ int id CampCodeString 0x7f04003c
 int id FeesCollectedEntry 0x7f040040
 int id FeesCollectedString 0x7f04003f
 int id LocationString 0x7f040036
+int id about_refresh 0x7f040042
 int id abs__action_bar 0x7f040020
 int id abs__action_bar_container 0x7f04001f
 int id abs__action_bar_subtitle 0x7f040011

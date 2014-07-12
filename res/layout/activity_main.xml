@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#ffff4c"
+    android:background="#FBC042" 
     tools:context=".MainActivity" >
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,6 +27,8 @@
          		android:layout_height="wrap_content"
          		android:layout_width="match_parent"
          		android:hint="DD/MM/YYYY"
+         		android:background="@drawable/edit_text_file"
+         		android:padding="1dp" 
         	/>
     </LinearLayout>
     
@@ -49,7 +51,9 @@
         	android:id="@+id/locationEntry"
          	android:layout_below="@+id/dateEntry"
          	android:layout_height="wrap_content"
-         	android:layout_width="match_parent"         
+         	android:layout_width="match_parent"
+         	android:padding="1dp"          
+         	android:background="@drawable/edit_text_file"
         />
     </LinearLayout>
     
@@ -73,6 +77,7 @@
          	android:layout_below="@+id/AttendanceEntry"
          	android:layout_height="wrap_content"
          	android:layout_width="match_parent"         
+         	android:background="@drawable/edit_text_file"
         />
     </LinearLayout>
     
@@ -96,6 +101,7 @@
          	android:layout_below="@+id/CampCodeString"
          	android:layout_height="wrap_content"
          	android:layout_width="match_parent"         
+         	android:background="@drawable/edit_text_file"
         />
     </LinearLayout>
     
@@ -119,6 +125,7 @@
          	android:layout_below="@+id/FeesCollectedString"
          	android:layout_height="wrap_content"
          	android:layout_width="match_parent"         
+         	android:background="@drawable/edit_text_file"
         />
     </LinearLayout>
     
@@ -128,7 +135,10 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="Submit"
+        android:background="@drawable/button_design"
+        android:textColor="#ffffff"
         >        
     </Button>
     

@@ -911,7 +911,13 @@ containing a value of this type.
         public static final int abs__textfield_searchview_right_holo_dark=0x7f02006d;
         public static final int abs__textfield_searchview_right_holo_light=0x7f02006e;
         public static final int abs__toast_frame=0x7f02006f;
-        public static final int ic_launcher=0x7f020070;
+        public static final int action_refresh=0x7f020070;
+        public static final int button_design=0x7f020071;
+        public static final int button_design2=0x7f020072;
+        public static final int edit_text_design2=0x7f020073;
+        public static final int edit_text_file=0x7f020074;
+        public static final int ic_launcher=0x7f020075;
+        public static final int yp=0x7f020076;
     }
     public static final class id {
         public static final int AttendanceEntry=0x7f04003a;
@@ -921,6 +927,7 @@ containing a value of this type.
         public static final int FeesCollectedEntry=0x7f040040;
         public static final int FeesCollectedString=0x7f04003f;
         public static final int LocationString=0x7f040036;
+        public static final int about_refresh=0x7f040042;
         public static final int abs__action_bar=0x7f040020;
         public static final int abs__action_bar_container=0x7f04001f;
         public static final int abs__action_bar_subtitle=0x7f040011;

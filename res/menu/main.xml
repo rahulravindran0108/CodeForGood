@@ -3,4 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.yuvaparivarthan.MainActivity" >
 
+    <item
+		android:id="@+id/about_refresh"
+		android:icon="@drawable/action_refresh"
+		android:showAsAction="ifRoom"
+		android:title="About Me"/> 
+		
 </menu>
