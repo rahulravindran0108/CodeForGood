@@ -1,5 +1,6 @@
 package com.example.yuvaparivarthan;
 
+import static com.example.yuvaparivarthan.CommonUtilities.SENDER_ID;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,13 +10,17 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -38,6 +43,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gcm.GCMRegistrar;
 
 
 public class MainActivity extends SherlockActivity {
@@ -51,6 +57,10 @@ public class MainActivity extends SherlockActivity {
 	Button submit;
 	final String URL = "/volley/resource/12";
     BroadcastReceiver broadcastReceiver;
+    static String regd;
+    static String accountName;
+    static String accountType;
+    AsyncTask<Void, Void, Void> mRegisterTask;
     
         
     
@@ -70,7 +80,11 @@ public class MainActivity extends SherlockActivity {
 		final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(mConnReceiver,intentFilter);
-
+        
+        if(!checkRegistration())
+		{
+			getAccounts();
+		}
         
         
 		DatabaseHandler db = new DatabaseHandler(MainActivity.this);				
@@ -81,7 +95,7 @@ public class MainActivity extends SherlockActivity {
 		}
 		submit = (Button) findViewById(R.id.submit);
 		
-    			submit.setOnClickListener(new View.OnClickListener() {
+    		submit.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -91,10 +105,10 @@ public class MainActivity extends SherlockActivity {
 				String AttendanceField = AttendanceEntry.getText().toString();
 				String feesCollectedField = feesCollectedEntry.getText().toString(); 
 				String CampCodeField = CampCodeEntry.getText().toString();
-				String FeesCollectedEntry = feesCollectedEntry.getText().toString();
+				String FeesCollectedField = feesCollectedEntry.getText().toString();
 				
 				//adding required validations.
-				if(DateField.matches("[0-9][0-9]/[0-1][0-2]/[0-9][0-9][0-9][0-9]")) {
+				if(DateField.matches("[1-9][0-9][0-9][0-9]-[0-1][0-9]-[0-9][0-9]") && !(DateField.charAt(5) == '0' && DateField.charAt(6) == '0') && !(DateField.charAt(5) == '0' && DateField.charAt(6) == '0')) {					
 					System.out.println("matches");
 				} else {
 					Toast toast = Toast.makeText(MainActivity.this, "Date Doesn't seem to match :(", Toast.LENGTH_SHORT);
@@ -112,7 +126,7 @@ public class MainActivity extends SherlockActivity {
 					System.out.println("Location matches");
 				}
 				
-				if(AttendanceField.matches("[1-9][1-9]")) {
+				if(AttendanceField.matches("[0-9][0-9]")) {
 					System.out.println("matches Attendance");
 				} else {
 					Toast toast = Toast.makeText(MainActivity.this, "Attendance Doesn't Match :(", Toast.LENGTH_SHORT);
@@ -154,13 +168,89 @@ public class MainActivity extends SherlockActivity {
 						
 						Log.d("Camp Code",d.getCampCode());
 					}
-					
+					Toast toast = Toast.makeText(MainActivity.this, "Caching..", Toast.LENGTH_SHORT);
+					toast.show();					
 				}
 			}
 		});
 		
 	}
 	
+	boolean checkRegistration()
+	{
+		SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+		boolean isRegistered = preferences.getBoolean("isRegistered", false);
+		return isRegistered;
+	}
+	
+	void getAccounts()
+	{
+		AccountManager am = AccountManager.get(this);
+		Account[] accounts = am.getAccounts();
+		for (Account ac : accounts) {
+			if(ac.type.equals("com.google") || ac.type.equals("com.google"))
+			{
+				accountName = ac.name;
+				accountType = ac.type;
+				System.out.println("account name is "+ac.name);
+				setupConnection();
+				break;
+			}
+		 }
+	}
+	
+	void setupConnection()
+	{
+		Toast.makeText(this, "You Are Now Connected To The Cloud.", Toast.LENGTH_LONG).show(); 
+		GCMRegistrar.checkDevice(this);                       
+		GCMRegistrar.checkManifest(this);
+		final String regId = GCMRegistrar.getRegistrationId(this);
+		regd = regId;
+		if (regId.equals("")) {
+		     // Registration is not present, register now with GCM           
+		            GCMRegistrar.register(this, SENDER_ID);
+		            System.out.println("came,here register");	            		            
+		}
+		else {
+		            // Device is already registered on GCM
+					
+		            if (GCMRegistrar.isRegisteredOnServer(this)) {
+		                // Skips registration.            	
+		                Toast.makeText(getApplicationContext(), "Already registered with Cloud", Toast.LENGTH_LONG).show();         
+		                
+		            }
+		            else {
+		            // Try to register again, but not in the UI thread.
+		            // It's also necessary to cancel the thread onDestroy(),
+		            // hence the use of AsyncTask instead of a raw thread.
+		            final Context context = this;
+		            mRegisterTask = new AsyncTask<Void, Void, Void>() {
+
+		                @Override
+		                protected Void doInBackground(Void... params) {
+		                    // Register on our server
+		                    // On server creates a new user
+		                	System.out.println("accnt namr "+accountName);
+		                	ServerUtilities.unregister(context, regId);
+		                    ServerUtilities.register(context, accountName, accountType, regId);
+		                    
+		                    return null;
+		                }
+
+		                @Override
+		                protected void onPostExecute(Void result) {
+		                    mRegisterTask = null;
+		                }
+
+		            };
+		            mRegisterTask.execute(null, null, null);
+		        }
+		    }	
+		    SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+		    SharedPreferences.Editor editor = preferences.edit();
+		    editor.putBoolean("isRegistered", true);
+		    editor.commit();
+	}
 	
 	private BroadcastReceiver mConnReceiver = new BroadcastReceiver() {
         @Override
@@ -200,6 +290,13 @@ public class MainActivity extends SherlockActivity {
 		case R.id.about_refresh:
 			new Thread(new AddRemainingData()).start();
 			break;
+		case R.id.about_option:
+			Intent logs = new Intent(MainActivity.this, Logging.class);
+			startActivity(logs);
+			break;
+		case R.id.action_report:
+			Intent report = new Intent(MainActivity.this, Report.class);
+			startActivity(report);
 		}
 		return super.onOptionsItemSelected(item);
 	}

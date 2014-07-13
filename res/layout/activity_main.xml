@@ -26,7 +26,7 @@
          		android:layout_toRightOf="@+id/dateString"
          		android:layout_height="wrap_content"
          		android:layout_width="match_parent"
-         		android:hint="DD/MM/YYYY"
+         		android:hint="YYYY-MM-DD"
          		android:background="@drawable/edit_text_file"
          		android:padding="1dp" 
         	/>
@@ -141,5 +141,12 @@
         android:textColor="#ffffff"
         >        
     </Button>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/submit"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:text="Yuva Parivarthan is a collective effort of transformers, visionaries, corporates, and the benefactors. An NGO which was cradled in the Kherwadi region of Bandra, is now brimming with endless energy and has spread across the entire nation." 
+        />
     
 </RelativeLayout>

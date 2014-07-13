@@ -8,5 +8,18 @@
 		android:icon="@drawable/action_refresh"
 		android:showAsAction="ifRoom"
 		android:title="About Me"/> 
+	
+    <item
+		android:id="@+id/about_option"
+		android:icon="@drawable/action_about"
+		android:showAsAction="ifRoom"
+		android:title="About Me"/>
+    
+    <item
+		android:id="@+id/action_report"
+		android:icon="@drawable/action_settings"
+		android:showAsAction="ifRoom"
+		android:title="About Me"/>
+    
 		
 </menu>

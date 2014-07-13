@@ -6,5 +6,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry exported="true" kind="lib" path="/home/rahul/volley/bin/volley.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/rahul/workspace/YuvaParivarthan/libs/gcm.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
