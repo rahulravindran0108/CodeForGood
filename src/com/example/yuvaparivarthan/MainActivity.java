@@ -252,6 +252,8 @@ public class MainActivity extends SherlockActivity {
 		    editor.commit();
 	}
 	
+	
+	
 	private BroadcastReceiver mConnReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -366,6 +368,7 @@ public class MainActivity extends SherlockActivity {
 			UserFunctions userFunction = new UserFunctions();
 			System.out.println("Date:"+AttendanceEntry.getText().toString());
 			JSONObject json = userFunction.sendDataToServer(dateEntry.getText().toString(), LocationEntry.getText().toString(), AttendanceEntry.getText().toString(), CampCodeEntry.getText().toString(), feesCollectedEntry.getText().toString());
+			final JSONObject jsonDummy = json;
 			try {
 				if(json.getString("success")!=null) {
 					String res = json.getString("success");
@@ -377,8 +380,15 @@ public class MainActivity extends SherlockActivity {
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
-								Toast toast = Toast.makeText(MainActivity.this, "Successfully added entry", Toast.LENGTH_SHORT);
-								toast.show();
+								Toast toast;
+								try {
+									toast = Toast.makeText(MainActivity.this, jsonDummy.getString("success_msg"), Toast.LENGTH_SHORT);
+									toast.show();
+								} catch (JSONException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								
 							}
 							
 						});
