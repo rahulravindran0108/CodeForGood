@@ -1,9 +1,9 @@
-CodeForGood
+Code For Good
 ===========
 
 # Yuva Parivartan Android application
-time alloted:24 hours.
-Runners up in "Code For Good challenge" held by JP Morgan
+- time alloted:24 hours.
+- Runners up in "Code For Good challenge" held by JP Morgan
 
 # Requirements
 - Create an android application capable of sending data to the servers.
@@ -39,3 +39,9 @@ Following are the required data:
 - Log button to view logs and delete archived message.
 - Report button to view back end report generated.
 ![Alt text](https://raw.githubusercontent.com/rahulravindran0108/CodeForGood/master/screenshots/photo-grid-android.jpg "UI Design")
+
+# The Back-End Interface Design
+![Alt text](https://raw.githubusercontent.com/rahulravindran0108/CodeForGood/master/screenshots/photo-grid-backend.png "Back-end Design")
+
+# Conclusion
+- built a robust and scalable application and provided basic data mining task at the back end for efficient exploration of data
