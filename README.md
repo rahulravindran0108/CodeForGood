@@ -38,4 +38,4 @@ Following are the required data:
 - Synch button to manually synch data
 - Log button to view logs and delete archived message.
 - Report button to view back end report generated.
-![Alt text](![Alt text](https://raw.githubusercontent.com/rahulravindran0108/CodeForGood/master/screenshots/photo-grid-android.jpg "UI Design")
+![Alt text](https://raw.githubusercontent.com/rahulravindran0108/CodeForGood/master/screenshots/photo-grid-android.jpg "UI Design")
