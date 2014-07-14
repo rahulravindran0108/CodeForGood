@@ -21,4 +21,4 @@ Runners up in "Code For Good challenge" held by JP Morgan
 - broadcast receivers for the push notification and network notifications
 - Automatic Synch on network connection
 - carefuly cached data on disk to avoid crashing of application when operating in offline mode.
-![Alt text](http://full/path/to/img.jpg "Architecture")
+![Alt text](https://github.com/rahulravindran0108/CodeForGood/blob/master/screenshots/architecture.jpg "Architecture")
